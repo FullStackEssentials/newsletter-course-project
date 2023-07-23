@@ -1,10 +1,23 @@
+import { PrismaClient } from "@prisma/client";
 import { createServer } from "./server";
+import { GooglePubSubService } from "./services/pubsub/gcp";
+import { SendGridService } from "./services/mailer/sendgrid";
 
 const PORT = process.env.PORT || 8080;
 
-const server = createServer().listen(PORT, () => {
-  console.log(`🚀 Server ready at: http://localhost:${PORT}`);
+const prisma = new PrismaClient();
+const pubSub = new GooglePubSubService(process.env.GCP_PROJECT_ID || "");
+const sendGrid = new SendGridService({
+  apiKey: process.env.SENDGRID_API_KEY || "",
+  sender: process.env.SENDGRID_SENDER || "",
 });
+
+const server = createServer({ prisma, pubSub, mailer: sendGrid }).listen(
+  PORT,
+  () => {
+    console.log(`🚀 Server ready at: http://localhost:${PORT}`);
+  }
+);
 
 const exitHandler = () => {
   if (server) {

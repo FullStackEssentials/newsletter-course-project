@@ -10,6 +10,11 @@ const router = createBrowserRouter([
     element: <SignupPage />,
     errorElement: <ErrorPage />,
   },
+  {
+    path: "/confirm-email-sent",
+    element: <div>Confirm email sent</div>,
+    errorElement: <ErrorPage />,
+  }
 ])
 
 ReactDOM.createRoot(document.getElementById("root")!).render(
