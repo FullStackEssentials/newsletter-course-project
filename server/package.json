@@ -12,7 +12,8 @@
     "local": "nodemon --watch src -e ts,ejs --exec npm run dev:start",
     "start": "node .",
     "test:unit": "DOTENV_CONFIG_PATH=./.env.test jest -i --verbose test/unit",
-    "test:integration": "DOTENV_CONFIG_PATH=./.env.test jest -i --detectOpenHandles --forceExit test/integration"
+    "test:integration": "DOTENV_CONFIG_PATH=./.env.test jest -i --detectOpenHandles --forceExit test/integration",
+    "prisma:ui": "npx prisma studio"
   },
   "dependencies": {
     "@prisma/client": "^5.0.0",
