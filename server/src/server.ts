@@ -1,4 +1,5 @@
 import express, { Express, Response, Request } from "express";
+import cors from "cors";
 import { createHealthRouter } from "./routes/health";
 import { createNewsletterRouter } from "./routes/newsletter";
 import { PrismaClient } from "@prisma/client";
@@ -33,6 +34,7 @@ export const createServer = ({
   server = express();
 
   // middleware setup
+  server.use(cors());
   server.use(express.json());
   server.use(express.urlencoded({ extended: true }));
 
