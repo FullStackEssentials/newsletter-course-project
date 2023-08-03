@@ -10,7 +10,8 @@
     "build": "npm-run-all clean tsc",
     "dev:start": "npm-run-all build start",
     "local": "nodemon --watch src -e ts,ejs --exec npm run dev:start",
-    "start": "node .",
+    "start": "npm run prisma:init && node .",
+    "prisma:init": "npx prisma generate && npx prisma db push",
     "test:unit": "DOTENV_CONFIG_PATH=./.env.test jest -i --verbose test/unit",
     "test:integration": "DOTENV_CONFIG_PATH=./.env.test jest -i --detectOpenHandles --forceExit test/integration",
     "prisma:ui": "npx prisma studio"
